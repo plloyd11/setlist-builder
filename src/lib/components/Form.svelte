@@ -3,6 +3,8 @@
 	let title = '';
 	let duration = '';
 
+	let titleInput; // Declare a variable to hold the input element
+
 	const addSong = () => {
 		const durationParts = duration.split(':');
 		if (
@@ -20,6 +22,9 @@
 		setlist.update((songs) => [...songs, { title, duration: totalDuration }]);
 		title = '';
 		duration = '';
+
+		// Set focus back to the title input
+		titleInput.focus();
 	};
 </script>
 
@@ -28,17 +33,17 @@
 		<div class="grid grid-cols-2 gap-8">
 			<label class="label">
 				Song title
-				<input class="input" type="text" bind:value={title} required />
+				<input
+					class="input mt-1.5"
+					type="text"
+					bind:this={titleInput}
+					bind:value={title}
+					required
+				/>
 			</label>
 			<label class="label">
 				Song duration
-				<input
-					class="input"
-					type="text"
-					bind:value={duration}
-					required
-					placeholder="mm:ss format"
-				/>
+				<input class="input mt-1.5" type="text" bind:value={duration} required placeholder="" />
 			</label>
 		</div>
 		<button type="submit" class="btn btn-lg variant-filled-primary">
